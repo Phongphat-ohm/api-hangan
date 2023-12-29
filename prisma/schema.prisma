@@ -1,0 +1,30 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x", "windows"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model bill {
+  id           Int    @id @default(autoincrement())
+  name         String
+  amount       Float
+  amount_bill  Float
+  reciver_code String
+  reciver_type String
+}
+
+model topup_history {
+  id           Int    @id @default(autoincrement())
+  bill_id      String
+  amount       Float
+  time_stamp   String
+  provide_name String
+  provide_is   String
+}
